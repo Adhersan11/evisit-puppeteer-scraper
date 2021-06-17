@@ -10,14 +10,15 @@ const puppeteer = require("puppeteer");
 
 //Puppeteer function that will scrape the data
 const healthTopic = async () => {
-  const browser = await puppeteer.launch();
-  const page = await browser.newPage();
+  const browser = await puppeteer.launch({
+    defaultViewport: null,
+    args: ["--window-size=1920,1080"],
+  });
+  const pages = await browser.pages();
+  const page = pages[0];
+
   //Launch a new page and goto the desired website
   console.log("Visit the apnwes page");
-  await page.setViewport({
-    width: 1400,
-    height: 1060,
-  });
   await page.goto("https://apnews.com/");
 
   //Click on the Topics dropdown
