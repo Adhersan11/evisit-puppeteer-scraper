@@ -14,11 +14,11 @@ const healthTopic = async () => {
   const page = await browser.newPage();
   //Launch a new page and goto the desired website
   console.log("Visit the apnwes page");
-  await page.goto("https://apnews.com/");
   await page.setViewport({
-    width: 1200,
-    height: 800,
+    width: 1400,
+    height: 1060,
   });
+  await page.goto("https://apnews.com/");
 
   //Click on the Topics dropdown
   await page.click("label.nav-action");
@@ -27,8 +27,11 @@ const healthTopic = async () => {
   console.log("Click the Health Topic in the Topics Dropdown");
   await page.click("a[href='/hub/health']");
 
+  //Close popup that appears in this page
+  await page.waitForSelector(".sailthru-overlay .sailthru-overlay-close");
+  await page.click(".sailthru-overlay .sailthru-overlay-close");
+
   //Dynamic waits to give time for the page to load
-  await page.waitForSelector("h1[data-key='hub-title']");
   await page.waitForSelector("[data-key='feed-card-wire-story-with-image']");
   await page.waitForSelector("[data-key='media-placeholder'] img");
 
@@ -106,7 +109,7 @@ const healthTopic = async () => {
   await browser.close();
 
   //Generates the HTML file that contains the desired data in table form.
-  htmlGen.createHtmlFile();
+  await htmlGen.createHtmlFile();
 };
 
 //The auto scroll function that scrolls to end of the page.

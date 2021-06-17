@@ -1,6 +1,4 @@
 const fs = require("fs");
-// JSON data
-const data = require("./data.json");
 // Build paths
 const { buildPathHtml } = require("./buildPaths");
 
@@ -98,6 +96,8 @@ const doesFileExist = (filePath) => {
 };
 
 const createHtmlFile = function () {
+  // JSON data
+  const data = require("./data.json");
   try {
     /* Check if the file for `html` build exists in system or not */
     if (doesFileExist(buildPathHtml)) {
