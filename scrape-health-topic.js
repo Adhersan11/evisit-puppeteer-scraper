@@ -22,11 +22,18 @@ const healthTopic = async () => {
   await page.goto("https://apnews.com/");
 
   //Click on the Topics dropdown
+  await page.waitForSelector("label.nav-action");
   await page.click("label.nav-action");
+
+  //Added necessary strick timeout, tried using only dynamic waitings, but the code is too fast for the browser,
+  //without this, I was noticing some instability
+  await page.waitForTimeout(2000);
 
   //Click on the Health topic
   console.log("Click the Health Topic in the Topics Dropdown");
-  await page.click("a[href='/hub/health']");
+  await page.waitForSelector(".dropdownItem-0-2-6 a[href='/hub/health']");
+  await page.waitForSelector(".topic-link");
+  await page.click(".dropdownItem-0-2-6 a[href='/hub/health']");
 
   //Close popup that appears in this page
   await page.waitForSelector(".sailthru-overlay .sailthru-overlay-close");
