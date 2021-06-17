@@ -132,4 +132,6 @@ async function autoScroll(page) {
   });
 }
 
+healthTopic();
+
 module.exports = { healthTopic };
